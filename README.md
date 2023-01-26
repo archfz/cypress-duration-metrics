@@ -33,7 +33,7 @@ stages of the `cypress run` lifecycle.
 2. If using typescript and es6 imports ensure `esModuleInterop` is enabled.
 3. Register the output plugin in `cypress.config.{js|ts}`
     ```js
-    import { registerDurationMetricsPlugin } from 'cypress-duration-metrics/plugin';
+    import { registerDurationMetricsPlugin } from 'src/plugin';
    
     export default defineConfig({
       e2e: {
@@ -45,7 +45,7 @@ stages of the `cypress run` lifecycle.
     ```
 4. Register the collector support in `cypress/support/e2e.{js|ts}`
     ```js
-    import { registerDurationMetricsSupport } from 'cypress-duration-metrics/support';
+    import { registerDurationMetricsSupport } from 'src/support';
     registerDurationMetricsSupport();
     ```
 
@@ -59,15 +59,15 @@ The tracking should work with any kind of [preprocessor](https://docs.cypress.io
 but the example below uses webpack. Your plugin file should look something like this:
 
 ```js
-import { registerDurationMetricsPlugin } from 'cypress-duration-metrics/plugin';
-   
+import {registerDurationMetricsPlugin} from 'src/plugin';
+
 export default defineConfig({
    e2e: {
-     setupNodeEvents(on, config) {
-        const { measurePreprocessorDuration } = registerDurationMetricsPlugin(on);
-        // .. webpackProcessor initiated here
-        on('file:preprocessor', measurePreprocessorDuration(webpackProcessor));
-     }
+      setupNodeEvents(on, config) {
+         const {measurePreprocessorDuration} = registerDurationMetricsPlugin(on);
+         // .. webpackProcessor initiated here
+         on('file:preprocessor', measurePreprocessorDuration(webpackProcessor));
+      }
    }
 });
 ```
@@ -123,6 +123,14 @@ You can see also the average duration for the command, the max duration and also
 it was run.
 
 ## Release Notes
+
+#### 0.1.2
+
+- Fix esm loader compatibility for cypress.
+
+#### 0.1.1
+
+- Fix missing js files in publish.
 
 #### 0.1.0
 

@@ -1,5 +1,5 @@
 import {CommandMetric, Metric} from "./types";
-import chalk from "chalk";
+const chalk = require("chalk");
 
 const PLUGIN_REQUIRE_TIME = Date.now();
 
@@ -79,7 +79,7 @@ const logTableFooter = () => {
   console.log('');
 }
 
-export const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
+const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
   let runStartTime: number;
   let firstSpecTime: number;
   let specStartTime: number;
@@ -168,3 +168,5 @@ export const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
     }
   }
 };
+
+export = registerDurationMetricsPlugin;

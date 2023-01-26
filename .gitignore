@@ -4,3 +4,8 @@ test/cypress/screenshots
 test/cypress/videos
 .idea
 .vscode
+*.d.ts
+*.js
+*.js.map
+esm
+commonjs

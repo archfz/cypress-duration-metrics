@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "esnext",
     "sourceMap": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -15,11 +15,12 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "isolatedModules": true,
-    "types": ["cypress"]
+    "esModuleInterop": true,
+    "outDir": "commonjs",
+    "types": ["cypress", "node"]
   },
   "include": [
-    "support.ts",
-    "plugin.ts"
+    "src/*",
   ],
   "exclude": ["node_modules"]
 }

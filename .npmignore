@@ -1,7 +1,6 @@
 test
 .idea
 .nvmrc
+.circleci
 *.png
-*.js
-*.ts
 tsconfig.json

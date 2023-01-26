@@ -1,6 +1,6 @@
 import {CommandMetric} from "./types";
 
-export const registerDurationMetricsSupport = () => {
+const registerDurationMetricsSupport = () => {
   let commandMetrics: Record<string, CommandMetric> = {};
 
   Cypress.on('command:start', (cmd) => {
@@ -40,3 +40,5 @@ export const registerDurationMetricsSupport = () => {
     commandMetrics = {};
   })
 };
+
+export = registerDurationMetricsSupport;

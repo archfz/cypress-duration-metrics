@@ -1,5 +1,5 @@
 import { defineConfig } from 'cypress';
-import {registerDurationMetricsPlugin} from "../plugin";
+import registerDurationMetricsPlugin from "../commonjs/plugin";
 
 export default defineConfig({
   e2e: {
