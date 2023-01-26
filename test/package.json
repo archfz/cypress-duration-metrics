@@ -1,5 +1,5 @@
 {
-  "name": "cypress-terminal-report-test",
+  "name": "cypress-duration-metrics-test",
   "version": "0.0.0",
   "description": "",
   "type": "module",
@@ -9,7 +9,8 @@
     "quick": "npm run build && npx cypress run --config video=false --spec cypress/integration/utilities.cy.js",
     "diverse": "npm run build && npx cypress run --config video=false --spec cypress/integration/misc.cy.js,cypress/integration/utilities.cy.js,cypress/integration/window.cy.js",
     "test": "mocha --require @babel/register specs/*.spec.js",
-    "test-ci": "mocha --require @babel/register $(./bin/split_matrix_specs.sh)"
+    "test-ci": "mocha --require @babel/register $(./bin/split_matrix_specs.sh)",
+    "publish": "exit 1"
   },
   "author": "Fodor Zoltan",
   "license": "MIT",
