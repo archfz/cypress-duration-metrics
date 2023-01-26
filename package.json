@@ -1,0 +1,39 @@
+{
+  "name": "cypress-duration-metrics",
+  "version": "0.1.0",
+  "description": "Measure duration of commands and different stages of cypress lifecycle.",
+  "main": "plugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/archfz/cypress-duration-metrics.git"
+  },
+  "keywords": [
+    "duration",
+    "timings",
+    "commands",
+    "performance",
+    "measurement",
+    "metrics",
+    "total"
+  ],
+  "author": "Fodor Zoltan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/archfz/cypress-duration-metrics/issues"
+  },
+  "homepage": "https://github.com/archfz/cypress-duration-metrics#readme",
+  "peerDependencies": {
+    "cypress": ">=10.0.0"
+  },
+  "devDependencies": {
+    "cypress": ">=10.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "typescript": "^4.9.4"
+  }
+}

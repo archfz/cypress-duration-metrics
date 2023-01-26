@@ -1,0 +1,7 @@
+test
+.idea
+.nvmrc
+*.png
+*.js
+*.ts
+tsconfig.json
