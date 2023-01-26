@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "build": "(cd .. && npm run build)",
-    "quick": "npm run build && npx cypress run --config video=false --spec cypress/integration/utilities.cy.js",
-    "diverse": "npm run build && npx cypress run --config video=false --spec cypress/integration/misc.cy.js,cypress/integration/utilities.cy.js,cypress/integration/window.cy.js",
+    "quick": "npm run build && npx cypress run --config video=false --spec cypress/integration/utilities.cy.ts",
+    "diverse": "npm run build && npx cypress run --config video=false --spec cypress/integration/misc.cy.ts,cypress/integration/utilities.cy.js,cypress/integration/window.cy.ts",
     "test": "mocha --require @babel/register specs/*.spec.js",
     "test-ci": "mocha --require @babel/register $(./bin/split_matrix_specs.sh)",
     "publish": "exit 1"
