@@ -30,10 +30,10 @@ stages of the `cypress run` lifecycle.
     ```bash
     npm i --save-dev cypress-duration-metrics
     ```
-2. If using typescript and es6 imports ensure `esModuleInterop` is enabled.
+2. If using typescript and esm imports ensure `esModuleInterop` is enabled.
 3. Register the output plugin in `cypress.config.{js|ts}`
     ```js
-    import { registerDurationMetricsPlugin } from 'src/plugin';
+    import registerDurationMetricsPlugin from 'src/plugin';
    
     export default defineConfig({
       e2e: {
@@ -45,7 +45,7 @@ stages of the `cypress run` lifecycle.
     ```
 4. Register the collector support in `cypress/support/e2e.{js|ts}`
     ```js
-    import { registerDurationMetricsSupport } from 'src/support';
+    import registerDurationMetricsSupport from 'src/support';
     registerDurationMetricsSupport();
     ```
 
@@ -123,6 +123,10 @@ You can see also the average duration for the command, the max duration and also
 it was run.
 
 ## Release Notes
+
+#### 0.1.3
+
+- Fix installation in readme.
 
 #### 0.1.2
 
