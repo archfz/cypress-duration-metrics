@@ -129,6 +129,8 @@ const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
     logMetricLine('Total exec time', {total: grandTotal}, grandTotal);
 
     logTableFooter();
+
+    console.log(chalk.grey('    Details on metrics at https://github.com/archfz/cypress-duration-metrics#metrics-explained'));
   });
 
   on('before:spec', () => {

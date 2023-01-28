@@ -5,12 +5,12 @@
 • [Install](#install)
 • [Preprocessor duration](#preprocessor-duration)
 • [Metrics explained](#metrics-explained)
-• [Release Notes](#release-notes)
+• [Release Notes](./RELEASE_NOTES.md)
 
 </div>
 
-Plugin for cypress for measuring total duration of the different commands and some
-stages of the `cypress run` lifecycle.
+Plugin for measuring total duration of the different commands and some stages of the 
+`cypress run` lifecycle.
 
 ![demo](https://raw.githubusercontent.com/archfz/cypress-duration-metrics/master/demo.png)
 
@@ -33,7 +33,7 @@ stages of the `cypress run` lifecycle.
 2. If using typescript and esm imports ensure `esModuleInterop` is enabled.
 3. Register the output plugin in `cypress.config.{js|ts}`
     ```js
-    import registerDurationMetricsPlugin from 'src/plugin';
+    import registerDurationMetricsPlugin from 'cypress-duration-metrics/plugin';
    
     export default defineConfig({
       e2e: {
@@ -45,7 +45,7 @@ stages of the `cypress run` lifecycle.
     ```
 4. Register the collector support in `cypress/support/e2e.{js|ts}`
     ```js
-    import registerDurationMetricsSupport from 'src/support';
+    import registerDurationMetricsSupport from 'cypress-duration-metrics/support';
     registerDurationMetricsSupport();
     ```
 
@@ -59,7 +59,7 @@ The tracking should work with any kind of [preprocessor](https://docs.cypress.io
 but the example below uses webpack. Your plugin file should look something like this:
 
 ```js
-import {registerDurationMetricsPlugin} from 'src/plugin';
+import {registerDurationMetricsPlugin} from 'cypress-duration-metrics/plugin';
 
 export default defineConfig({
    e2e: {
@@ -122,20 +122,3 @@ Total duration for a specific command. All runs of the command are measured and 
 You can see also the average duration for the command, the max duration and also how many times 
 it was run.
 
-## Release Notes
-
-#### 0.1.3
-
-- Fix installation in readme.
-
-#### 0.1.2
-
-- Fix esm loader compatibility for cypress.
-
-#### 0.1.1
-
-- Fix missing js files in publish.
-
-#### 0.1.0
-
-- Initial release.

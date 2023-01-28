@@ -15,7 +15,7 @@ const registerDurationMetricsSupport = () => {
         : 'resource';
     }
 
-    commandMetrics[cmd.attributes.chainerId] = {
+    commandMetrics[cmd.attributes.id] = {
       command: cmd.attributes.name + (variant ? ` (${variant})` : ''),
       started: Date.now(),
       total: 0,
@@ -23,7 +23,7 @@ const registerDurationMetricsSupport = () => {
   })
 
   Cypress.on('command:end', (cmd) => {
-    const id = cmd.attributes.chainerId;
+    const id = cmd.attributes.id;
 
     if (commandMetrics[id]) {
       commandMetrics[id].total = Date.now() - commandMetrics[id].started;
