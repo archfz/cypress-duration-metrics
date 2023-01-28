@@ -10,7 +10,8 @@
 </div>
 
 Plugin for measuring total duration of the different commands and some stages of the 
-`cypress run` lifecycle.
+`cypress run` lifecycle. Helps to identify where tests spend a lot of time
+and potentially come up with performance improvements.
 
 ![demo](https://raw.githubusercontent.com/archfz/cypress-duration-metrics/master/demo.png)
 
@@ -125,5 +126,5 @@ This is the total time spent on executing cypress commands.
 
 Total duration for a specific command. All runs of the command are measured and added together. 
 You can see also the average duration for the command, the max duration and also how many times 
-it was run.
+it was run. Only commands that were used during the run will appear.
 
