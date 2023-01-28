@@ -31,11 +31,15 @@ const registerDurationMetricsSupport = () => {
     }
   })
 
-  Cypress.on('test:before:run', () => {
-    lastTestStartTime = Date.now();
+  Cypress.on('test:before:run', (test) => {
+    if (test.currentRetry > 0) {
+      lastTestStartTime = Date.now();
+    } else {
+      lastTestStartTime = 0;
+    }
   })
-  Cypress.on('test:after:run', (test) => {
-    if (test.currentRetry !== test.retries) {
+  Cypress.on('test:after:run', () => {
+    if (lastTestStartTime !== 0) {
       // @ts-ignore
       Cypress.backend('task', {
         task: 'cypress_duration_metrics__collect_retries',

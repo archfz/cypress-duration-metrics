@@ -1,6 +1,6 @@
 {
   "name": "cypress-duration-metrics",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Measure duration of commands and different stages of cypress lifecycle.",
   "main": "./commonjs/plugin.js",
   "exports": {

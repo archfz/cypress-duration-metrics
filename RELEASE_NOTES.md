@@ -1,5 +1,9 @@
 ## Release Notes
 
+#### 0.2.2
+
+- Fix incorrect logic on retries calculation.
+
 #### 0.2.1
 
 - Fix command metrics accumulation issue.
