@@ -78,14 +78,14 @@ export default defineConfig({
 #### `Total exec time`
 
 Time spent between `the plugins require time` and `after:run` dispatch. 
-This is the current best approximation of the absolute total duration of the command. 
+This is the current best approximation of the absolute total duration of the `cypress run` command. 
 But it is not entirely correct, as there is still time that can be spent by cypress before loading 
 in the plugin and after `after:run` on shutdown.
 
 #### `Test retries`
 
 Time spent on tests from all specs that failed and retried. Time is measured only from the retries
-and not the last try, which is considered the main execution.
+and not the first try, which is considered the main execution.
 
 #### `Total run time`
 
@@ -105,7 +105,7 @@ dispatches.
 #### `Between specs`
 
 Total time spent in-between specs. This measurement is always 0 when there is only 1 spec in the
-whole run. The time is measure between `after:spec` of previous and `before:spec` of current test. 
+whole run. The time is measured between `after:spec` of previous and `before:spec` of current test. 
 
 #### `Browser boot time`
 
@@ -124,7 +124,7 @@ This is the total time spent on executing cypress commands.
 
 #### `cy.*`
 
-Total duration for a specific command. All runs of the command are measured and added together. 
+Total duration for a specific cypress command. All runs of the command are measured and added together. 
 You can see also the average duration for the command, the max duration and also how many times 
 it was run. Only commands that were used during the run will appear.
 

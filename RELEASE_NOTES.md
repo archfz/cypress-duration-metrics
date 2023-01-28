@@ -1,5 +1,9 @@
 ## Release Notes
 
+#### 1.0.0
+
+- Readme updates.
+
 #### 0.2.2
 
 - Fix incorrect logic on retries calculation.
