@@ -1,5 +1,10 @@
 ## Release Notes
 
+#### 0.2.0
+
+- Collect and display information on retries.
+- Improve command start time by using `process.uptime()`. 
+
 #### 0.1.5
 
 - Fix build not present in release. 

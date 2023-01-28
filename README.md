@@ -81,6 +81,11 @@ This is the current best approximation of the absolute total duration of the com
 But it is not entirely correct, as there is still time that can be spent by cypress before loading 
 in the plugin and after `after:run` on shutdown.
 
+#### `Test retries`
+
+Time spent on tests from all specs that failed and retried. Time is measured only from the retries
+and not the last try, which is considered the main execution.
+
 #### `Total run time`
 
 Time spent between `before:run` and `after:run` dispatch.

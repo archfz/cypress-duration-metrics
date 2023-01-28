@@ -1,14 +1,10 @@
-import {CommandMetric, Metric} from "./types";
+import {CommandMetric, initMetric, Metric, registerOnMetric} from "./common";
+
 const chalk = require("chalk");
 
+const RUNNING_TIME = Math.floor(process.uptime() * 1000);
 const PLUGIN_REQUIRE_TIME = Date.now();
-
-const initMetric = () => ({total: 0, max: 0, count: 0});
-const registerOnMetric = (total: number, metric: Metric) => {
-  metric.total += total;
-  metric.max = Math.max(metric.max || 0, total);
-  metric.count = (metric.count || 0) + 1;
-};
+const NODE_START_TIME = PLUGIN_REQUIRE_TIME - RUNNING_TIME;
 
 const padStr = (str: string, space: number, pos: 'left' | 'right', sideSpace: number = 0) => {
   const needed = space - str.length;
@@ -89,6 +85,7 @@ const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
   const preprocessorMetric: Metric = initMetric();
   const betweenSpecMetric: Metric = initMetric();
   const specMetric: Metric = initMetric();
+  const retriesMetric: Metric = initMetric();
 
   let measuringPreprocessDuration = false;
 
@@ -97,7 +94,7 @@ const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
   });
 
   on('after:run', () => {
-    const grandTotal = Date.now() - PLUGIN_REQUIRE_TIME;
+    const grandTotal = Date.now() - NODE_START_TIME;
     const runTotal = Date.now() - runStartTime;
     const browserBootTime = runTotal - (betweenSpecMetric.total + specMetric.total);
     let commandsTotal = 0;
@@ -124,8 +121,9 @@ const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
     logMetricLine('Browser boot time', {total: browserBootTime}, grandTotal);
     logTableSeparator();
     logMetricLine('Total run time', {total: runTotal}, grandTotal);
-    logMetricLine('Cypress boot time', {total: runStartTime - PLUGIN_REQUIRE_TIME}, grandTotal);
+    logMetricLine('Cypress boot time', {total: runStartTime - NODE_START_TIME}, grandTotal);
     logTableSeparator();
+    logMetricLine('Test retries', retriesMetric, grandTotal);
     logMetricLine('Total exec time', {total: grandTotal}, grandTotal);
 
     logTableFooter();
@@ -154,6 +152,9 @@ const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
         registerOnMetric(metric.total, commandMetric[metric.command]);
       })
     },
+    cypress_duration_metrics__collect_retries: (total: number) => {
+      registerOnMetric(total, retriesMetric);
+    }
   });
 
   return {

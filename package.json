@@ -1,6 +1,6 @@
 {
   "name": "cypress-duration-metrics",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Measure duration of commands and different stages of cypress lifecycle.",
   "main": "./commonjs/plugin.js",
   "exports": {
@@ -10,6 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "develop": "tsc --watch",
     "prepublishOnly": "npm run build"
   },
   "repository": {

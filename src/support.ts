@@ -1,7 +1,8 @@
-import {CommandMetric} from "./types";
+import {CommandMetric} from "./common";
 
 const registerDurationMetricsSupport = () => {
   let commandMetrics: Record<string, CommandMetric> = {};
+  let lastTestStartTime: number;
 
   Cypress.on('command:start', (cmd) => {
     if (['end-logGroup', 'within-restore'].includes(cmd.attributes.name)) {
@@ -30,15 +31,25 @@ const registerDurationMetricsSupport = () => {
     }
   })
 
-  Cypress.on('test:after:run', () => {
+  Cypress.on('test:before:run', () => {
+    lastTestStartTime = Date.now();
+  })
+  Cypress.on('test:after:run', (test) => {
+    if (test.currentRetry !== test.retries) {
+      // @ts-ignore
+      Cypress.backend('task', {
+        task: 'cypress_duration_metrics__collect_retries',
+        arg: Date.now() - lastTestStartTime,
+      })
+        .catch(() => {/* noop */});
+    }
     // @ts-ignore
     Cypress.backend('task', {
       task: 'cypress_duration_metrics__collect',
       arg: Object.values(commandMetrics),
     })
       .catch(() => {/* noop */});
-    commandMetrics = {};
-  })
+  });
 };
 
 export = registerDurationMetricsSupport;
