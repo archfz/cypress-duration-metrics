@@ -49,6 +49,8 @@ const registerDurationMetricsSupport = () => {
       arg: Object.values(commandMetrics),
     })
       .catch(() => {/* noop */});
+
+    commandMetrics = {};
   });
 };
 

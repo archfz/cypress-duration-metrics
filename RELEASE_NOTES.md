@@ -1,5 +1,9 @@
 ## Release Notes
 
+#### 0.2.1
+
+- Fix command metrics accumulation issue.
+
 #### 0.2.0
 
 - Collect and display information on retries.
