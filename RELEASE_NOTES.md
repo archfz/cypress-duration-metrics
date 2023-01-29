@@ -1,5 +1,9 @@
 ## Release Notes
 
+#### 1.1.0
+
+- Add `Between commands` and `Between tests` metrics.
+
 #### 1.0.0
 
 - Readme updates.

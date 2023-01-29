@@ -1,12 +1,26 @@
-import {CommandMetric} from "./common";
+import {CommandMetric, initMetric, registerOnMetric} from "./common";
 
 const registerDurationMetricsSupport = () => {
   let commandMetrics: Record<string, CommandMetric> = {};
+  let betweenCommandsMetric = initMetric();
   let lastTestStartTime: number;
+  let lastTestEndTimeInSpec: number;
+  let lastCommandEndTimeInTest: number;
+  let lastTestSpec: string;
+
+  const sendBackend = (data: {task: string, arg: any}) => {
+    // @ts-ignore
+    Cypress.backend('task', data)
+      .catch(() => {/* noop */});
+  }
 
   Cypress.on('command:start', (cmd) => {
     if (['end-logGroup', 'within-restore'].includes(cmd.attributes.name)) {
       return;
+    }
+
+    if (lastCommandEndTimeInTest) {
+      registerOnMetric(Date.now() - lastCommandEndTimeInTest, betweenCommandsMetric);
     }
 
     let variant;
@@ -22,9 +36,9 @@ const registerDurationMetricsSupport = () => {
       total: 0,
     };
   })
-
   Cypress.on('command:end', (cmd) => {
     const id = cmd.attributes.id;
+    lastCommandEndTimeInTest = Date.now();
 
     if (commandMetrics[id]) {
       commandMetrics[id].total = Date.now() - commandMetrics[id].started;
@@ -37,24 +51,40 @@ const registerDurationMetricsSupport = () => {
     } else {
       lastTestStartTime = 0;
     }
+
+    if (lastTestSpec != test.invocationDetails.relativeFile) {
+      lastTestSpec = test.invocationDetails.relativeFile;
+      lastTestEndTimeInSpec = 0;
+    }
+
+    if (lastTestEndTimeInSpec) {
+      sendBackend({
+        task: 'cypress_duration_metrics__collect_test_between',
+        arg: Date.now() - lastTestEndTimeInSpec,
+      })
+    }
   })
   Cypress.on('test:after:run', () => {
     if (lastTestStartTime !== 0) {
-      // @ts-ignore
-      Cypress.backend('task', {
+      sendBackend({
         task: 'cypress_duration_metrics__collect_retries',
         arg: Date.now() - lastTestStartTime,
       })
-        .catch(() => {/* noop */});
     }
-    // @ts-ignore
-    Cypress.backend('task', {
+
+    sendBackend({
       task: 'cypress_duration_metrics__collect',
       arg: Object.values(commandMetrics),
     })
-      .catch(() => {/* noop */});
+    sendBackend({
+      task: 'cypress_duration_metrics__collect_command_between',
+      arg: betweenCommandsMetric,
+    })
 
     commandMetrics = {};
+    betweenCommandsMetric = initMetric();
+    lastCommandEndTimeInTest = 0;
+    lastTestEndTimeInSpec = Date.now();
   });
 };
 

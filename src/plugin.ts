@@ -1,4 +1,4 @@
-import {CommandMetric, initMetric, Metric, registerOnMetric} from "./common";
+import {CommandMetric, initMetric, mergeMetrics, Metric, registerOnMetric} from "./common";
 
 const chalk = require("chalk");
 
@@ -84,6 +84,8 @@ const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
   const commandMetric: Record<string, Metric> = {};
   const preprocessorMetric: Metric = initMetric();
   const betweenSpecMetric: Metric = initMetric();
+  const betweenTestMetric: Metric = initMetric();
+  const betweenCommandMetric: Metric = initMetric();
   const specMetric: Metric = initMetric();
   const retriesMetric: Metric = initMetric();
 
@@ -110,6 +112,8 @@ const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
 
     logTableSeparator();
     logMetricLine('Tracked cy commands', {total: commandsTotal}, grandTotal);
+    logMetricLine('Between commands', betweenCommandMetric, grandTotal);
+    logMetricLine('Between tests', betweenTestMetric, grandTotal);
     if (measuringPreprocessDuration) {
       logMetricLine('File preprocessor', preprocessorMetric, grandTotal);
     } else {
@@ -154,6 +158,12 @@ const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
     },
     cypress_duration_metrics__collect_retries: (total: number) => {
       registerOnMetric(total, retriesMetric);
+    },
+    cypress_duration_metrics__collect_test_between: (total: number) => {
+      registerOnMetric(total, betweenTestMetric);
+    },
+    cypress_duration_metrics__collect_command_between: (metric: Metric) => {
+      mergeMetrics(metric, betweenCommandMetric);
     }
   });
 

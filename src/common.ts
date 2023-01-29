@@ -7,8 +7,8 @@ export const registerOnMetric = (total: number, metric: Metric) => {
   metric.max = Math.max(metric.max || 0, total);
   metric.count = (metric.count || 0) + 1;
 };
-// export const mergeMetrics = (inMetric: Metric, outMetric: Metric) => {
-//   outMetric.total += inMetric.total;
-//   outMetric.max = Math.max(inMetric.max || 0, outMetric.max || 0);
-//   outMetric.count = (inMetric.count || 0) + (outMetric.count || 0);
-// };
+export const mergeMetrics = (inMetric: Metric, outMetric: Metric) => {
+  outMetric.total += inMetric.total;
+  outMetric.max = Math.max(inMetric.max || 0, outMetric.max || 0);
+  outMetric.count = (inMetric.count || 0) + (outMetric.count || 0);
+};

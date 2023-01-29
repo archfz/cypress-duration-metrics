@@ -107,6 +107,14 @@ dispatches.
 Total time spent in-between specs. This measurement is always 0 when there is only 1 spec in the
 whole run. The time is measured between `after:spec` of previous and `before:spec` of current test. 
 
+#### `Between tests`
+
+Same as `Between specs`, but for individual tests isolated per spec.
+
+#### `Between commands`
+
+Same as `Between specs`, but for commands isolated per tests.
+
 #### `Browser boot time`
 
 This is the equivalent of (`Total run time` - `Between specs` - `Specs`). The current assumption
