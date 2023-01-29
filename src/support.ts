@@ -52,7 +52,7 @@ const registerDurationMetricsSupport = () => {
       lastTestStartTime = 0;
     }
 
-    if (lastTestSpec != test.invocationDetails.relativeFile) {
+    if (test.invocationDetails && lastTestSpec != test.invocationDetails.relativeFile) {
       lastTestSpec = test.invocationDetails.relativeFile;
       lastTestEndTimeInSpec = 0;
     }

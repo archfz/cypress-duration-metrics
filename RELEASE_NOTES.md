@@ -1,5 +1,9 @@
 ## Release Notes
 
+#### 1.1.1
+
+- Fix issue with missing `invocationDetails` for certain tests.
+
 #### 1.1.0
 
 - Add `Between commands` and `Between tests` metrics.
