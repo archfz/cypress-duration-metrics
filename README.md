@@ -34,7 +34,7 @@ and potentially come up with performance improvements.
 2. If using typescript and esm imports ensure `esModuleInterop` is enabled.
 3. Register the output plugin in `cypress.config.{js|ts}`
     ```js
-    import registerDurationMetricsPlugin from 'cypress-duration-metrics/plugin';
+    import registerDurationMetricsPlugin from 'cypress-duration-metrics/src/plugin';
    
     export default defineConfig({
       e2e: {
@@ -46,7 +46,7 @@ and potentially come up with performance improvements.
     ```
 4. Register the collector support in `cypress/support/e2e.{js|ts}`
     ```js
-    import registerDurationMetricsSupport from 'cypress-duration-metrics/support';
+    import registerDurationMetricsSupport from 'cypress-duration-metrics/src/support';
     registerDurationMetricsSupport();
     ```
 
