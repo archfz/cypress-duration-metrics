@@ -4,8 +4,8 @@
   "description": "Measure duration of commands and different stages of cypress lifecycle.",
   "main": "./commonjs/plugin.js",
   "exports": {
-    "./plugin": "./commonjs/plugin.js",
-    "./support": "./commonjs/support.js"
+    "./plugin": "./src/commonjs/plugin.js",
+    "./support": "./src/commonjs/support.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
