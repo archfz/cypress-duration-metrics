@@ -182,4 +182,4 @@ const registerDurationMetricsPlugin = (on: Cypress.PluginEvents) => {
   }
 };
 
-export = registerDurationMetricsPlugin;
+export default registerDurationMetricsPlugin;
