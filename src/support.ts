@@ -88,4 +88,4 @@ const registerDurationMetricsSupport = () => {
   });
 };
 
-export = registerDurationMetricsSupport;
+export default registerDurationMetricsSupport;
